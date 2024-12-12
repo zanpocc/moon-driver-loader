@@ -57,6 +57,18 @@ pub fn open_file(symbolic_link_path: &str) -> windows::core::Result<HANDLE> {
     Ok(handle.unwrap())
 }
 
+pub fn is_driver_load_by_symlink(symbolic_link_path: &str) -> bool{
+    match open_file(symbolic_link_path) {
+        Ok(h) => {
+            unsafe { let _ = CloseHandle(h); };
+            return true
+        }
+        _ => {
+            return false;
+        }
+    }
+}
+
 pub fn adjust_privilege() -> Result<(), NTSTATUS> {
     let mut was_enabled: u8 = 0;
     let r = unsafe { RtlAdjustPrivilege(10, 1, 0, &mut was_enabled as _) };
@@ -229,7 +241,15 @@ impl DriverLoader {
 
 #[cfg(test)]
 mod tests {
+    use super::is_driver_load_by_symlink;
+
 
     #[test]
     fn test_driver_load() {}
+
+
+    #[test]
+    fn test_is_driver_load_by_symlink() {
+        assert_eq!(is_driver_load_by_symlink("\\\\.\\20240703"),false) 
+    }
 }
