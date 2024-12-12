@@ -1,5 +1,6 @@
 use std::path::Path;
 
+use moon_win32_utils::{registry::{create_registry_key, delete_registry_key, registry_key_exists, set_registry_value}, string::{str_to_unicode_string, string_to_u16_bytes2}};
 use windows::{
     core::{Error, PCWSTR},
     Win32::{
@@ -15,10 +16,7 @@ use windows::{
     },
 };
 
-use crate::{
-    registry::{create_registry_key, delete_registry_key, registry_key_exists, set_registry_value},
-    string::{str_to_unicode_string, string_to_u16_bytes2},
-};
+
 
 #[repr(C)]
 #[derive(Debug)]

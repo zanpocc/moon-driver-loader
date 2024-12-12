@@ -13,6 +13,16 @@ name = "moon-driver-loader"
 version = "0.1.0"
 dependencies = [
  "lazy_static",
+ "moon-win32-utils",
+ "windows",
+]
+
+[[package]]
+name = "moon-win32-utils"
+version = "0.1.0"
+source = "git+https://github.com/zanpocc/moon-win32-utils.git#68eac38243466d173e25539a2e5c2225ba396f33"
+dependencies = [
+ "lazy_static",
  "windows",
 ]
 
