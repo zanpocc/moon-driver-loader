@@ -1,7 +1,10 @@
 use std::path::Path;
 
 use moon_win32_utils::{
-    ntdll_wrap::{adjust_privilege, nt_load_driver, nt_unload_driver},
+    ntdll_wrap::{
+        adjust_privilege, nt_load_driver, nt_unload_driver, SE_DEBUG_PRIVILEGE,
+        SE_LOAD_DRIVER_PRIVILEGE,
+    },
     registry::{delete_registry_key, registry_key_exists},
 };
 use windows::Win32::{
@@ -32,8 +35,8 @@ impl DriverLoader for ServiceDriverLoader {
         }
 
         // 1
-        adjust_privilege(10)?;
-        adjust_privilege(20)?;
+        adjust_privilege(SE_LOAD_DRIVER_PRIVILEGE)?;
+        adjust_privilege(SE_DEBUG_PRIVILEGE)?;
 
         // 2
         let file_name = Path::new(file).file_stem().and_then(|stem| stem.to_str());
@@ -64,8 +67,8 @@ impl DriverLoader for ServiceDriverLoader {
         }
 
         // 1
-        adjust_privilege(10)?;
-        adjust_privilege(20)?;
+        adjust_privilege(SE_LOAD_DRIVER_PRIVILEGE)?;
+        adjust_privilege(SE_DEBUG_PRIVILEGE)?;
 
         // 2
         let file_name = Path::new(file).file_stem().and_then(|stem| stem.to_str());

@@ -43,7 +43,7 @@ dependencies = [
 [[package]]
 name = "moon-win32-utils"
 version = "0.1.0"
-source = "git+https://github.com/zanpocc/moon-win32-utils.git#69018412b91f369cb666acb4890d9eeb47c845fb"
+source = "git+https://github.com/zanpocc/moon-win32-utils.git#b190cca2f2a7930a7255e432dbec9f74f2e1166b"
 dependencies = [
  "lazy_static",
  "rand",

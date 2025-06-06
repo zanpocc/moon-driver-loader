@@ -1,6 +1,6 @@
 use moon_win32_utils::{
     registry::{create_registry_key, registry_key_exists, set_registry_value},
-    string::string_to_u16_bytes2,
+    string::string_to_u16_slice_u8,
 };
 use windows::Win32::{
     Foundation::{NTSTATUS, STATUS_ALREADY_REGISTERED, STATUS_UNSUCCESSFUL},
@@ -29,7 +29,7 @@ fn write_driver_info_to_registry(file: &str, app_sub_key: String) -> Result<(), 
         &hkey,
         "ImagePath",
         REG_EXPAND_SZ,
-        string_to_u16_bytes2(&image_path, true).as_slice(),
+        string_to_u16_slice_u8(&image_path, true).as_slice(),
     )
     .map_err(|_| STATUS_UNSUCCESSFUL)?;
 
